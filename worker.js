@@ -4,18 +4,18 @@
 const MAX_LOG_ENTRIES = 500; // cap stored log so KV value doesn't grow unbounded
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
     if (url.pathname === '/api/visits' && request.method === 'GET') {
-      return handleVisits(request, env);
+      return handleVisits(request, env, ctx);
     }
 
     return env.ASSETS.fetch(request);
   },
 };
 
-async function handleVisits(request, env) {
+async function handleVisits(request, env, ctx) {
   if (!env.VISITS_KV) {
     return new Response(JSON.stringify({ count: 0, warning: 'VISITS_KV binding not configured' }), {
       headers: { 'Content-Type': 'application/json' },
@@ -45,9 +45,10 @@ async function handleVisits(request, env) {
       );
 
       // Log IP + country for this new unique visit, in the background.
-      // Doesn't block the response — errors here are swallowed so a logging
-      // hiccup never breaks the counter itself.
-      logVisit(request, env).catch(() => {});
+      // ctx.waitUntil keeps this running even after the response is sent —
+      // without it, Cloudflare can terminate the request before the KV
+      // write finishes, which is why the log wasn't appearing before.
+      ctx.waitUntil(logVisit(request, env).catch(() => {}));
     }
 
     return new Response(JSON.stringify({ count }), { headers });
