@@ -1,12 +1,11 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
   "name": "earsie-portfolio",
-  "main": "src/index.ts",
-  "compatibility_date": "2025-02-04",
-  "observability": {
-    "enabled": true
+  "compatibility_date": "2026-07-14",
+  "main": "worker.js",
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS"
   },
-
   // Add this to your wrangler.jsonc
   "kv_namespaces": [
     {
