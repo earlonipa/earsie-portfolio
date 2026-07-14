@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Earl Onipa — IT & Network Infrastructure</title>
+<meta name="google-adsense-account" content="ca-pub-1205642449385764">
+<title>Earl Onipa - IT & Network Infrastructure</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -156,18 +157,12 @@
     display:flex; flex-direction:column; gap:10px; transition:border-color .2s, transform .2s;
   }
   .cert-card:hover{border-color:var(--cyan); transform:translateY(-2px);}
-  .cert-top{display:flex; align-items:center; justify-content:space-between;}
-  .cert-icon{width:30px; height:30px; border-radius:7px; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
-  .cert-icon svg{width:16px; height:16px;}
-  .cert-icon.aws{background:rgba(255,153,0,0.12);}
-  .cert-icon.fortinet{background:rgba(238,44,45,0.12);}
-  .cert-icon.datadog{background:rgba(168,85,247,0.15);}
-  .cert-icon.cisco{background:rgba(0,187,222,0.12);}
   .cert-issuer{
     font-family:var(--mono); font-size:10px; font-weight:700; letter-spacing:.05em;
     text-transform:uppercase; padding:4px 9px; border-radius:20px; width:fit-content;
   }
   .cert-issuer.aws{background:rgba(255,153,0,0.12); color:#ff9900;}
+  .cert-issuer.hackviser{background:rgba(0,1,2,1.0); color:#61cf5a;}
   .cert-issuer.fortinet{background:rgba(238,44,45,0.12); color:#ee2c2d;}
   .cert-issuer.datadog{background:rgba(99,44,166,0.15); color:#a855f7;}
   .cert-issuer.cisco{background:rgba(0,187,222,0.12); color:#00bbde;}
@@ -204,10 +199,9 @@
   .contact-grid{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:32px; margin-bottom:48px;}
   .contact-links{display:flex; gap:16px; flex-wrap:wrap;}
   .foot-bottom{font-family:var(--mono); font-size:11.5px; color:var(--text-low); display:flex; justify-content:space-between; border-top:1px solid var(--line-soft); padding-top:24px; flex-wrap:wrap; gap:10px;}
-  .visit-counter{display:flex; align-items:center; gap:6px;}
+    .visit-counter{display:flex; align-items:center; gap:6px;}
   .visit-counter .dot{border-radius:50%; background:var(--green); box-shadow:0 0 6px var(--green); display:inline-block;}
   .visit-counter #visitCount{color:var(--cyan); font-weight:600;}
-
   @media (max-width:860px){
     .hero-grid{grid-template-columns:1fr;}
     .about-grid{grid-template-columns:1fr;}
@@ -232,7 +226,7 @@
 
 <header class="nav">
   <div class="nav-inner">
-    <div class="logo">EARL<span>.</span>ONIPA</div>
+    <div class="logo">EARL JAY VINCENT ONIPA</div>
     <nav class="nav-links">
       <a href="#about">about</a>
       <a href="#experience">experience</a>
@@ -277,7 +271,7 @@
 
   <!-- ABOUT -->
   <section id="about">
-    <div class="kicker">01 — About</div>
+    <div class="kicker">About</div>
     <h2>Infrastructure is the product.</h2>
     <div class="about-grid">
       <div>
@@ -295,27 +289,19 @@
 
   <!-- EXPERIENCE -->
   <section id="experience">
-    <div class="kicker">02 — Experience</div>
+    <div class="kicker">Experience</div>
     <h2>Where I've built.</h2>
     <div class="timeline">
       <div class="t-item">
         <div class="t-date">2023 — Present</div>
         <div>
-          <div class="t-role">IT / Network Infrastructure Lead</div>
-          <div class="t-org">[Company name] · Cagayan de Oro City, PH</div>
-          <div class="t-desc">Own network, firewall, cloud, and monitoring infrastructure for the organization — leading a network engineer and coordinating with facilities and admin teams on infrastructure projects, from VLAN rollouts to multi-account AWS cost optimization.</div>
+          <div class="t-role">IT / Network Infrastructure Supervisor</div>
+          <div class="t-org">SupportZebra · Cagayan de Oro City, PH</div>
+          <div class="t-desc">Firewall, cloud, and monitoring infrastructure for the organization — leading a network engineer and coordinating with facilities and admin teams on infrastructure projects, from VLAN rollouts to multi-account AWS cost optimization.</div>
         </div>
       </div>
       <div class="t-item">
-        <div class="t-date">[Year] — [Year]</div>
-        <div>
-          <div class="t-role">IT Engineer</div>
-          <div class="t-org">[Earlier company]</div>
-          <div class="t-desc">Managed and maintained core IT infrastructure including network switches, firewalls, servers, and cloud environments. Configured and monitored Cisco switching and Sophos firewall systems, supported AWS and Azure cloud resources, and implemented monitoring solutions to track system health and performance.</div>
-        </div>
-      </div>
-      <div class="t-item">
-        <div class="t-date">2022 — Present</div>
+        <div class="t-date">2025 — Present</div>
         <div>
           <div class="t-role">Founder & Principal</div>
           <div class="t-org">Earsie Network and Data Solutions</div>
@@ -323,10 +309,19 @@
         </div>
       </div>
       <div class="t-item">
-        <div class="t-date">[Year] — [Year]</div>
+        <div class="t-date">2019 — 2023</div>
         <div>
-          <div class="t-role">IT Support Specialist</div>
-          <div class="t-org">[Earlier company]</div>
+          <div class="t-role">IT Engineer</div>
+          <div class="t-org">SupportZebra · Cagayan de Oro City, PH</div>
+          <div class="t-desc">Managed and maintained core IT infrastructure including network switches, firewalls, servers, and cloud environments. Configured and monitored Cisco switching and Sophos firewall systems, supported AWS and Azure cloud resources, and implemented monitoring solutions to track system health and performance.</div>
+        </div>
+      </div>
+    </div>
+      <div class="t-item">
+        <div class="t-date">2017 — 2019</div>
+        <div>
+          <div class="t-role">IT Support</div>
+          <div class="t-org">SupportZebra · Cagayan de Oro City, PH</div>
           <div class="t-desc">Provided first- and second-line technical support across hardware, software, and network connectivity issues. Handled workstation setup and imaging, managed user accounts in Active Directory, and troubleshot LAN/Wi-Fi and VPN issues — building the foundation for a move into network engineering.</div>
         </div>
       </div>
@@ -335,7 +330,7 @@
 
   <!-- SKILLS -->
   <section id="skills">
-    <div class="kicker">03 — Skills</div>
+    <div class="kicker">Skills</div>
     <h2>Toolkit.</h2>
     <div class="skill-cols">
       <div class="skill-col">
@@ -379,7 +374,7 @@
 
   <!-- PROJECTS -->
   <section id="projects">
-    <div class="kicker">04 — Projects</div>
+    <div class="kicker">Projects</div>
     <h2>Recent builds.</h2>
     <div class="proj-grid">
       <div class="proj-card">
@@ -411,82 +406,84 @@
 
   <!-- CERTIFICATIONS -->
   <section id="certifications">
-    <div class="kicker">05 — Certifications</div>
+    <div class="kicker">Certifications</div>
     <h2>Verified credentials.</h2>
     <div class="cert-grid">
       <div class="cert-card">
-        <svg class="cert-emblem" viewBox="0 0 64 64"><polygon points="32,2 58,17 58,47 32,62 6,47 6,17" fill="url(#g1)"/><path d="M22 40h20a6 6 0 0 0 1-11.9A9 9 0 0 0 26 25.6 7 7 0 0 0 22 40z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b5fd9"/><stop offset="1" stop-color="#12275c"/></linearGradient></defs></svg>
+        <span class="cert-issuer hackviser">Hackviser</span>
+        <h3>Certified Associate Penetration Tester – CAPT</h3>
+        <p class="cert-meta">Issued Jul 18, 2025</p>
+      </div>
+      <div class="cert-card">
+        <span class="cert-issuer hackviser">Hackviser</span>
+        <h3>Certified Cybersecurity Foundations – CORE</h3>
+        <p class="cert-meta">Issued Jul 10, 2026</p>
+      </div>
+      <div class="cert-card">
+        <span class="cert-issuer aws">AWS</span>
         <h3>AWS Certified Solutions Architect – Associate</h3>
-        <p class="cert-issuer-name">Amazon Web Services</p>
         <p class="cert-meta">Expires Aug 1, 2028</p>
       </div>
       <div class="cert-card">
-        <svg class="cert-emblem" viewBox="0 0 64 64"><path d="M32 3 58 12 58 34c0 16-11 24-26 27C17 58 6 50 6 34L6 12Z" fill="url(#g2)"/><path d="M22 33h20a6 6 0 0 0 1-11.9A9 9 0 0 0 26 18.6 7 7 0 0 0 22 33z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e6b45"/><stop offset="1" stop-color="#0b3822"/></linearGradient></defs></svg>
+        <span class="cert-issuer aws">AWS</span>
         <h3>AWS Cloud Quest: Cloud Practitioner</h3>
-        <p class="cert-issuer-name">Amazon Web Services</p>
         <p class="cert-meta">Issued Sep 25, 2023</p>
       </div>
       <div class="cert-card">
-        <svg class="cert-emblem" viewBox="0 0 64 64"><path d="M8 4h48v40l-24 18-24-18Z" fill="url(#g3)"/><rect x="19" y="18" width="26" height="20" rx="2" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M19 24h26M19 30h18" stroke="#fff" stroke-width="2.2"/><defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e0559b"/><stop offset="1" stop-color="#9c1f61"/></linearGradient></defs></svg>
+        <span class="cert-issuer aws">AWS</span>
         <h3>AWS Knowledge: Cloud Essentials</h3>
-        <p class="cert-issuer-name">Amazon Web Services</p>
         <p class="cert-meta">Issued Sep 22, 2023</p>
       </div>
       <div class="cert-card">
-        <svg class="cert-emblem" viewBox="0 0 64 64"><polygon points="32,3 61,32 32,61 3,32" fill="url(#g4)"/><path d="M32 19 45 32 32 45 19 32Z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><defs><linearGradient id="g4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8a93a3"/><stop offset="1" stop-color="#454c59"/></linearGradient></defs></svg>
+        <span class="cert-issuer aws">AWS</span>
         <h3>AWS Partner: Cloud Economics Essentials</h3>
-        <p class="cert-issuer-name">Amazon Web Services</p>
         <p class="cert-meta">Issued Aug 7, 2025</p>
       </div>
       <div class="cert-card">
-        <svg class="cert-emblem" viewBox="0 0 64 64"><polygon points="32,3 61,32 32,61 3,32" fill="url(#g5)"/><path d="M22 39 32 22l10 17Z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><defs><linearGradient id="g5" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8a93a3"/><stop offset="1" stop-color="#454c59"/></linearGradient></defs></svg>
+        <span class="cert-issuer aws">AWS</span>
         <h3>AWS Partner: Sales Accredited</h3>
-        <p class="cert-issuer-name">Amazon Web Services</p>
         <p class="cert-meta">Issued Aug 7, 2025</p>
       </div>
       <div class="cert-card">
-        <svg class="cert-emblem" viewBox="0 0 64 64"><polygon points="32,3 61,32 32,61 3,32" fill="url(#g6)"/><path d="M22 32h20M32 22v20" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle cx="32" cy="32" r="10" fill="none" stroke="#fff" stroke-width="2.2"/><defs><linearGradient id="g6" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8a93a3"/><stop offset="1" stop-color="#454c59"/></linearGradient></defs></svg>
+        <span class="cert-issuer aws">AWS</span>
         <h3>AWS Partner: Technical Accredited</h3>
-        <p class="cert-issuer-name">Amazon Web Services</p>
         <p class="cert-meta">Issued Aug 7, 2025</p>
       </div>
       <div class="cert-card">
-        <svg class="cert-emblem" viewBox="0 0 64 64"><rect x="6" y="6" width="52" height="52" rx="10" fill="url(#g7)"/><ellipse cx="32" cy="36" rx="10" ry="8" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="24" cy="24" r="3.4" fill="#fff"/><circle cx="32" cy="20" r="3.4" fill="#fff"/><circle cx="40" cy="24" r="3.4" fill="#fff"/><defs><linearGradient id="g7" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8b5cf6"/><stop offset="1" stop-color="#4c1d95"/></linearGradient></defs></svg>
+        <span class="cert-issuer datadog">Datadog</span>
         <h3>Cloud Security Engineer Learning Path</h3>
-        <p class="cert-issuer-name">Datadog</p>
         <p class="cert-meta">Issued Jun 27, 2025</p>
       </div>
       <div class="cert-card">
-        <svg class="cert-emblem" viewBox="0 0 64 64"><rect x="6" y="6" width="52" height="52" rx="10" fill="url(#g8)"/><path d="M32 15 47 21v11c0 10-6.5 16-15 20-8.5-4-15-10-15-20V21Z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><path d="M26 32l4 4 8-9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="g8" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c3aed"/><stop offset="1" stop-color="#3b1466"/></linearGradient></defs></svg>
+        <span class="cert-issuer fortinet">Fortinet</span>
         <h3>Fortinet Certified Associate — Cybersecurity</h3>
-        <p class="cert-issuer-name">Fortinet</p>
         <p class="cert-meta">Expires Jul 12, 2026</p>
       </div>
       <div class="cert-card">
-        <svg class="cert-emblem" viewBox="0 0 64 64"><rect x="6" y="6" width="52" height="52" rx="10" fill="url(#g9)"/><path d="M32 15 47 21v11c0 10-6.5 16-15 20-8.5-4-15-10-15-20V21Z" fill="none" stroke="#ee2c2d" stroke-width="2.2" stroke-linejoin="round"/><path d="M25 34l5 5 10-11" fill="none" stroke="#ee2c2d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="g9" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e9ecef"/><stop offset="1" stop-color="#c3c9d1"/></linearGradient></defs></svg>
+        <span class="cert-issuer fortinet">Fortinet</span>
         <h3>FortiGate 7.4 Operator (NSE)</h3>
-        <p class="cert-issuer-name">Fortinet</p>
-        <p class="cert-meta">Issued Jul 12, 2024</p>
+        <p class="cert-meta">Fortinet NSE Exam</p>
       </div>
       <div class="cert-card">
-        <svg class="cert-emblem" viewBox="0 0 64 64"><rect x="6" y="6" width="52" height="52" rx="10" fill="url(#g10)"/><path d="M32 14 46 21v10c0 9-6 15-14 19-8-4-14-10-14-19V21Z" fill="none" stroke="#ee2c2d" stroke-width="2.2" stroke-linejoin="round"/><circle cx="32" cy="30" r="3" fill="#ee2c2d"/><path d="M32 33v9" stroke="#ee2c2d" stroke-width="2.2" stroke-linecap="round"/><defs><linearGradient id="g10" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e9ecef"/><stop offset="1" stop-color="#c3c9d1"/></linearGradient></defs></svg>
+        <span class="cert-issuer fortinet">Fortinet</span>
         <h3>Introduction to the Threat Landscape</h3>
-        <p class="cert-issuer-name">Fortinet</p>
-        <p class="cert-meta">Issued Sep 21, 2023</p>
+        <p class="cert-meta">Fortinet NSE Exam</p>
       </div>
       <div class="cert-card">
-        <svg class="cert-emblem" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" fill="url(#g11)"/><path d="M14 36c8-10 28-10 36 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M20 28c6-6 18-6 24 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><circle cx="32" cy="42" r="3" fill="#fff"/><defs><linearGradient id="g11" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#0e7490"/></linearGradient></defs></svg>
+        <span class="cert-issuer cisco">Cisco</span>
         <h3>Networking Basics</h3>
-        <p class="cert-issuer-name">Cisco Networking Academy</p>
-        <p class="cert-meta">Issued Jun 26, 2025</p>
+        <p class="cert-meta">Cisco Networking Academy</p>
       </div>
     </div>
     <a class="btn btn-ghost" style="margin-top:24px;" href="https://www.credly.com/users/earl-jay-vincent-onipa" target="_blank" rel="noopener">View all badges on Credly →</a>
+    <a class="btn btn-ghost" style="margin-top:24px;" href="https://hackviser.com/verify?id=HV-CAPT-PIT9O4VV" target="_blank" rel="noopener">View Certificate on Hackviser CAPT →</a>
+    <a class="btn btn-ghost" style="margin-top:24px;" href="https://hackviser.com/verify?id=HV-CORE-ZPH23SKI" target="_blank" rel="noopener">View Certificate for Hackviser CORE →</a>
   </section>
+
 
   <!-- BUSINESS -->
   <section id="business">
-    <div class="kicker">06 — Business</div>
+    <div class="kicker">Business</div>
     <h2>Earsie Network and Data Solutions.</h2>
     <div class="biz-panel">
       <div>
@@ -506,14 +503,14 @@
 </main>
 
 <footer id="contact" class="wrap">
-  <div class="kicker">07 — Contact</div>
+  <div class="kicker">Contact</div>
   <div class="contact-grid">
     <div>
       <h2 style="margin-bottom:8px;">Let's connect.</h2>
       <p style="color:var(--text-low); font-size:14px; max-width:420px;">Open to network/infrastructure roles, consulting work, and conversations about IT projects — reach out any time.</p>
     </div>
     <div class="contact-links">
-      <a class="btn btn-primary" href="mailto:your.email@example.com">Email me</a>
+      <a class="btn btn-primary" href="mailto:admin@earlonipa.com">Email me</a>
       <a class="btn btn-ghost" href="https://www.linkedin.com/in/earlonipa/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </div>
@@ -527,7 +524,7 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Unique visit counter (server-side, cookie-deduped)
+ // Unique visit counter (server-side, cookie-deduped)
   fetch('/api/visits')
     .then(res => res.json())
     .then(data => {
