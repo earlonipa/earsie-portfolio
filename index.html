@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Earl Onipa — IT & Network Infrastructure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#0a0f1a;
+    --bg-1:#0f1729;
+    --bg-panel:#121d33;
+    --line:#22314f;
+    --line-soft:#1a2540;
+    --text-hi:#eaf0fb;
+    --text-mid:#a9b6cc;
+    --text-low:#6b7893;
+    --amber:#e8a33d;
+    --amber-dim:#8a6329;
+    --cyan:#4fd1c5;
+    --green:#4caf7d;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(79,209,197,0.06), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 90% 10%, rgba(232,163,61,0.05), transparent 60%),
+      var(--bg-0);
+    color:var(--text-mid);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 32px;}
+  ::selection{background:var(--amber); color:#0a0f1a;}
+  :focus-visible{outline:2px solid var(--cyan); outline-offset:3px;}
+
+  /* NAV */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(10,15,26,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 32px; max-width:1120px; margin:0 auto;
+  }
+  .logo{font-family:var(--mono); font-weight:700; font-size:15px; color:var(--text-hi); letter-spacing:.02em;}
+  .logo span{color:var(--amber);}
+  .nav-links{display:flex; gap:28px; font-family:var(--mono); font-size:13px;}
+  .nav-links a{color:var(--text-low); transition:color .15s;}
+  .nav-links a:hover{color:var(--cyan);}
+  .nav-links a::before{content:'~/'; color:var(--line);}
+  .menu-btn{display:none; background:none; border:1px solid var(--line); color:var(--text-mid); font-family:var(--mono); padding:8px 12px; border-radius:4px;}
+
+  /* HERO */
+  .hero{padding:88px 0 72px; border-bottom:1px solid var(--line-soft); position:relative; overflow:hidden;}
+  .hero-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center;}
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; color:var(--green);
+    display:flex; align-items:center; gap:8px; margin-bottom:20px; letter-spacing:.04em;
+  }
+  .dot{width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green); animation:blink 2s ease-in-out infinite;}
+  @keyframes blink{0%,100%{opacity:1;} 50%{opacity:.35;}}
+  h1{
+    font-family:var(--mono); font-weight:800; font-size:clamp(34px,4.6vw,54px);
+    color:var(--text-hi); line-height:1.08; letter-spacing:-0.01em; margin-bottom:18px;
+  }
+  h1 .accent{color:var(--amber);}
+  .hero-role{font-size:18px; color:var(--text-mid); margin-bottom:22px; font-weight:500;}
+  .hero-desc{max-width:480px; color:var(--text-low); font-size:15px; margin-bottom:32px;}
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:13px; padding:12px 22px; border-radius:5px;
+    border:1px solid var(--line); transition:all .18s; display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{background:var(--amber); color:#1a1207; border-color:var(--amber); font-weight:600;}
+  .btn-primary:hover{background:#f3b458; transform:translateY(-1px);}
+  .btn-ghost{color:var(--text-mid); border-color:var(--line);}
+  .btn-ghost:hover{border-color:var(--cyan); color:var(--cyan);}
+
+  /* PORT PANEL — signature element */
+  .panel{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:10px;
+    padding:22px; box-shadow:0 20px 60px -20px rgba(0,0,0,0.6);
+  }
+  .panel-head{
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:var(--mono); font-size:11px; color:var(--text-low);
+    padding-bottom:14px; margin-bottom:16px; border-bottom:1px solid var(--line-soft);
+    text-transform:uppercase; letter-spacing:.08em;
+  }
+  .panel-head .status{color:var(--green);}
+  .port-grid{display:grid; grid-template-columns:repeat(8,1fr); gap:8px;}
+  .port{
+    aspect-ratio:1/0.85; background:var(--bg-1); border:1px solid var(--line-soft); border-radius:3px;
+    position:relative; cursor:default;
+  }
+  .port .led{
+    position:absolute; top:5px; right:5px; width:5px; height:5px; border-radius:50%;
+    background:var(--line); transition:background .3s, box-shadow .3s;
+  }
+  .port.up .led{background:var(--green); box-shadow:0 0 6px var(--green);}
+  .port.act .led{background:var(--amber); box-shadow:0 0 6px var(--amber);}
+  .port-label{
+    font-family:var(--mono); font-size:9px; color:var(--text-low); position:absolute;
+    bottom:4px; left:5px;
+  }
+  .port-legend{
+    display:flex; gap:18px; margin-top:16px; font-family:var(--mono); font-size:10.5px; color:var(--text-low);
+    flex-wrap:wrap;
+  }
+  .port-legend span{display:flex; align-items:center; gap:6px;}
+  .legend-dot{width:6px; height:6px; border-radius:50%;}
+
+  section{padding:80px 0; border-bottom:1px solid var(--line-soft);}
+  .kicker{font-family:var(--mono); font-size:12px; color:var(--amber); letter-spacing:.1em; text-transform:uppercase; margin-bottom:10px;}
+  h2{font-family:var(--mono); font-size:clamp(22px,3vw,30px); color:var(--text-hi); margin-bottom:36px; font-weight:700;}
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px;}
+  .about-grid p{margin-bottom:16px; font-size:15px; color:var(--text-mid);}
+  .stat-list{display:flex; flex-direction:column; gap:18px;}
+  .stat{display:flex; gap:16px; align-items:baseline; border-left:2px solid var(--line); padding-left:16px;}
+  .stat b{font-family:var(--mono); color:var(--cyan); font-size:15px; min-width:64px;}
+  .stat span{color:var(--text-low); font-size:13.5px;}
+
+  /* TIMELINE */
+  .timeline{display:flex; flex-direction:column; gap:0;}
+  .t-item{display:grid; grid-template-columns:110px 1fr; gap:24px; padding:26px 0; border-top:1px solid var(--line-soft); position:relative;}
+  .t-item:first-child{border-top:none;}
+  .t-date{font-family:var(--mono); font-size:12.5px; color:var(--text-low); padding-top:2px;}
+  .t-role{font-size:16px; color:var(--text-hi); font-weight:600; margin-bottom:4px;}
+  .t-org{font-family:var(--mono); font-size:12.5px; color:var(--amber); margin-bottom:10px;}
+  .t-desc{font-size:14px; color:var(--text-low); max-width:640px;}
+
+  /* SKILLS */
+  .skill-cols{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line-soft); border:1px solid var(--line-soft); border-radius:8px; overflow:hidden;}
+  .skill-col{background:var(--bg-panel); padding:24px 20px;}
+  .skill-col h3{font-family:var(--mono); font-size:12px; color:var(--cyan); margin-bottom:14px; letter-spacing:.03em;}
+  .skill-col ul{list-style:none; display:flex; flex-direction:column; gap:9px;}
+  .skill-col li{font-size:13.5px; color:var(--text-mid); padding-left:14px; position:relative;}
+  .skill-col li::before{content:'›'; position:absolute; left:0; color:var(--text-low);}
+
+  /* CERTIFICATIONS */
+  .cert-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+  .cert-card{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:8px; padding:18px;
+    display:flex; flex-direction:column; gap:10px; transition:border-color .2s, transform .2s;
+  }
+  .cert-card:hover{border-color:var(--cyan); transform:translateY(-2px);}
+  .cert-top{display:flex; align-items:center; justify-content:space-between;}
+  .cert-icon{width:30px; height:30px; border-radius:7px; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .cert-icon svg{width:16px; height:16px;}
+  .cert-icon.aws{background:rgba(255,153,0,0.12);}
+  .cert-icon.fortinet{background:rgba(238,44,45,0.12);}
+  .cert-icon.datadog{background:rgba(168,85,247,0.15);}
+  .cert-icon.cisco{background:rgba(0,187,222,0.12);}
+  .cert-issuer{
+    font-family:var(--mono); font-size:10px; font-weight:700; letter-spacing:.05em;
+    text-transform:uppercase; padding:4px 9px; border-radius:20px; width:fit-content;
+  }
+  .cert-issuer.aws{background:rgba(255,153,0,0.12); color:#ff9900;}
+  .cert-issuer.fortinet{background:rgba(238,44,45,0.12); color:#ee2c2d;}
+  .cert-issuer.datadog{background:rgba(99,44,166,0.15); color:#a855f7;}
+  .cert-issuer.cisco{background:rgba(0,187,222,0.12); color:#00bbde;}
+  .cert-card h3{font-size:14px; color:var(--text-hi); font-weight:600; line-height:1.35;}
+  .cert-meta{font-family:var(--mono); font-size:11px; color:var(--text-low);}
+
+  /* PROJECTS */
+  .proj-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .proj-card{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:8px; padding:24px;
+    display:flex; flex-direction:column; gap:12px; transition:border-color .2s, transform .2s;
+  }
+  .proj-card:hover{border-color:var(--amber-dim); transform:translateY(-2px);}
+  .proj-tag{font-family:var(--mono); font-size:10.5px; color:var(--green); text-transform:uppercase; letter-spacing:.06em;}
+  .proj-card h3{font-size:16px; color:var(--text-hi); font-weight:600;}
+  .proj-card p{font-size:13.5px; color:var(--text-low);}
+  .proj-stack{display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:8px;}
+  .chip{font-family:var(--mono); font-size:10.5px; color:var(--text-low); border:1px solid var(--line); padding:3px 8px; border-radius:20px;}
+
+  /* BUSINESS */
+  .biz-panel{
+    background:linear-gradient(135deg, var(--bg-panel), var(--bg-1));
+    border:1px solid var(--line); border-radius:10px; padding:40px;
+    display:grid; grid-template-columns:1.3fr 1fr; gap:32px; align-items:center;
+  }
+  .biz-panel h3{font-family:var(--mono); color:var(--text-hi); font-size:20px; margin-bottom:12px;}
+  .biz-panel p{font-size:14px; color:var(--text-mid); margin-bottom:18px;}
+  .biz-list{list-style:none; display:flex; flex-direction:column; gap:8px;}
+  .biz-list li{font-size:13.5px; color:var(--text-low); padding-left:16px; position:relative;}
+  .biz-list li::before{content:'✓'; color:var(--green); position:absolute; left:0;}
+
+  /* CONTACT / FOOTER */
+  footer{padding:70px 0 40px;}
+  .contact-grid{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:32px; margin-bottom:48px;}
+  .contact-links{display:flex; gap:16px; flex-wrap:wrap;}
+  .foot-bottom{font-family:var(--mono); font-size:11.5px; color:var(--text-low); display:flex; justify-content:space-between; border-top:1px solid var(--line-soft); padding-top:24px; flex-wrap:wrap; gap:10px;}
+  .visit-counter{display:flex; align-items:center; gap:6px;}
+  .visit-counter .dot{border-radius:50%; background:var(--green); box-shadow:0 0 6px var(--green); display:inline-block;}
+  .visit-counter #visitCount{color:var(--cyan); font-weight:600;}
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .about-grid{grid-template-columns:1fr;}
+    .skill-cols{grid-template-columns:1fr 1fr;}
+    .cert-grid{grid-template-columns:1fr 1fr;}
+    .proj-grid{grid-template-columns:1fr;}
+    .biz-panel{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+    .t-item{grid-template-columns:1fr;}
+  }
+  @media (max-width:520px){
+    .skill-cols{grid-template-columns:1fr;}
+    .cert-grid{grid-template-columns:1fr;}
+    .wrap{padding:0 20px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="logo">EARL<span>.</span>ONIPA</div>
+    <nav class="nav-links">
+      <a href="#about">about</a>
+      <a href="#experience">experience</a>
+      <a href="#skills">skills</a>
+      <a href="#projects">projects</a>
+      <a href="#certifications">certifications</a>
+      <a href="#business">business</a>
+      <a href="#contact">contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero" id="top" style="border-bottom:1px solid var(--line-soft);">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> AVAILABLE FOR OPPORTUNITIES · CAGAYAN DE ORO, PH</div>
+        <h1>Keeping networks,<br>clouds & calls <span class="accent">up</span>.</h1>
+        <div class="hero-role">IT & Network Infrastructure Lead</div>
+        <p class="hero-desc">I design, secure, and monitor the infrastructure that businesses run on — from Cisco switching and Sophos firewalls to AWS multi-account clouds and end-to-end observability. Founder of Earsie Network and Data Solutions.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#contact">Get in touch →</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/earlonipa/" target="_blank" rel="noopener">View LinkedIn</a>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <span>SW-CORE-01 · 24-PORT STATUS</span>
+          <span class="status">● ALL LINKS UP</span>
+        </div>
+        <div class="port-grid" id="portGrid"></div>
+        <div class="port-legend">
+          <span><i class="legend-dot" style="background:var(--green)"></i> Infra & Network</span>
+          <span><i class="legend-dot" style="background:var(--amber)"></i> Cloud & Monitoring</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="kicker">01 — About</div>
+    <h2>Infrastructure is the product.</h2>
+    <div class="about-grid">
+      <div>
+        <p>I work at the intersection of network engineering, cloud infrastructure, and monitoring — the layer most people never see, but everyone feels the moment it goes down. My day-to-day spans Cisco Catalyst switching, Sophos XGS firewalls, AWS multi-account environments, Azure Virtual Desktop, and VoIP/PBX systems.</p>
+        <p>Alongside my IT role, I run Earsie Network and Data Solutions, a DTI-registered IT and network solutions business based in Cagayan de Oro — bringing enterprise-grade infrastructure practices to smaller organizations that need them just as much.</p>
+      </div>
+      <div class="stat-list">
+        <div class="stat"><b>Network</b><span>Cisco Catalyst switching, VLAN & DHCP design, Sophos XGS firewall administration</span></div>
+        <div class="stat"><b>Cloud</b><span>AWS multi-account orgs, Azure Virtual Desktop, cost & traffic analysis</span></div>
+        <div class="stat"><b>Monitoring</b><span>Datadog + SNMP end-to-end observability across switching, firewall & compute</span></div>
+        <div class="stat"><b>Comms</b><span>VoIP / PBX administration & dialer automation</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="kicker">02 — Experience</div>
+    <h2>Where I've built.</h2>
+    <div class="timeline">
+      <div class="t-item">
+        <div class="t-date">2023 — Present</div>
+        <div>
+          <div class="t-role">IT / Network Infrastructure Lead</div>
+          <div class="t-org">[Company name] · Cagayan de Oro City, PH</div>
+          <div class="t-desc">Own network, firewall, cloud, and monitoring infrastructure for the organization — leading a network engineer and coordinating with facilities and admin teams on infrastructure projects, from VLAN rollouts to multi-account AWS cost optimization.</div>
+        </div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">[Year] — [Year]</div>
+        <div>
+          <div class="t-role">IT Engineer</div>
+          <div class="t-org">[Earlier company]</div>
+          <div class="t-desc">Managed and maintained core IT infrastructure including network switches, firewalls, servers, and cloud environments. Configured and monitored Cisco switching and Sophos firewall systems, supported AWS and Azure cloud resources, and implemented monitoring solutions to track system health and performance.</div>
+        </div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2022 — Present</div>
+        <div>
+          <div class="t-role">Founder & Principal</div>
+          <div class="t-org">Earsie Network and Data Solutions</div>
+          <div class="t-desc">DTI-registered IT and network solutions business delivering infrastructure setup, network design, and technical consulting for local businesses in CDO.</div>
+        </div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">[Year] — [Year]</div>
+        <div>
+          <div class="t-role">IT Support Specialist</div>
+          <div class="t-org">[Earlier company]</div>
+          <div class="t-desc">Provided first- and second-line technical support across hardware, software, and network connectivity issues. Handled workstation setup and imaging, managed user accounts in Active Directory, and troubleshot LAN/Wi-Fi and VPN issues — building the foundation for a move into network engineering.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="kicker">03 — Skills</div>
+    <h2>Toolkit.</h2>
+    <div class="skill-cols">
+      <div class="skill-col">
+        <h3>NETWORK INFRA</h3>
+        <ul>
+          <li>Cisco Catalyst 9404R / 9200L</li>
+          <li>VLAN & DHCP design</li>
+          <li>Sophos XGS firewalls</li>
+          <li>WinMTR & link diagnostics</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <h3>CLOUD & AUTOMATION</h3>
+        <ul>
+          <li>AWS (multi-account orgs, EC2, S3)</li>
+          <li>Azure Virtual Desktop</li>
+          <li>CloudShell / bash scripting</li>
+          <li>IAM & cost optimization</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <h3>MONITORING</h3>
+        <ul>
+          <li>Datadog dashboards & alerts</li>
+          <li>SNMP v2c/v3 (USM)</li>
+          <li>Custom metric integrations</li>
+          <li>Capacity & traffic analysis</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <h3>COMMS & SYSTEMS</h3>
+        <ul>
+          <li>VoIP / PBX administration</li>
+          <li>VICIdial API automation</li>
+          <li>Active Directory</li>
+          <li>Technical documentation</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="kicker">04 — Projects</div>
+    <h2>Recent builds.</h2>
+    <div class="proj-grid">
+      <div class="proj-card">
+        <span class="proj-tag">Cloud / Frontend</span>
+        <h3>AWS S3 Public File Browser</h3>
+        <p>Customized fork of an S3 file browser — added a media gallery lightbox, video thumbnail generation, grid/tile views, and Cognito-based authentication.</p>
+        <div class="proj-stack">
+          <span class="chip">AWS S3</span><span class="chip">Cognito</span><span class="chip">CloudFront</span>
+        </div>
+      </div>
+      <div class="proj-card">
+        <span class="proj-tag">Observability</span>
+        <h3>Datadog SNMP Monitoring Suite</h3>
+        <p>End-to-end SNMP monitoring across Cisco 9404R, a 9200L stack, and Sophos XGS 3100 — resolving USM protocol mismatches and building custom dashboards.</p>
+        <div class="proj-stack">
+          <span class="chip">Datadog</span><span class="chip">SNMP</span><span class="chip">Cisco</span><span class="chip">Sophos</span>
+        </div>
+      </div>
+      <div class="proj-card">
+        <span class="proj-tag">Network Automation</span>
+        <h3>Enterprise VLAN & DHCP Rollout</h3>
+        <p>Generated a complete Cisco IOS configuration for 62 VLANs on a Catalyst 9404R directly from a spreadsheet-based VLAN plan.</p>
+        <div class="proj-stack">
+          <span class="chip">Cisco IOS</span><span class="chip">DHCP</span><span class="chip">Scripting</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <div class="kicker">05 — Certifications</div>
+    <h2>Verified credentials.</h2>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <svg class="cert-emblem" viewBox="0 0 64 64"><polygon points="32,2 58,17 58,47 32,62 6,47 6,17" fill="url(#g1)"/><path d="M22 40h20a6 6 0 0 0 1-11.9A9 9 0 0 0 26 25.6 7 7 0 0 0 22 40z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b5fd9"/><stop offset="1" stop-color="#12275c"/></linearGradient></defs></svg>
+        <h3>AWS Certified Solutions Architect – Associate</h3>
+        <p class="cert-issuer-name">Amazon Web Services</p>
+        <p class="cert-meta">Expires Aug 1, 2028</p>
+      </div>
+      <div class="cert-card">
+        <svg class="cert-emblem" viewBox="0 0 64 64"><path d="M32 3 58 12 58 34c0 16-11 24-26 27C17 58 6 50 6 34L6 12Z" fill="url(#g2)"/><path d="M22 33h20a6 6 0 0 0 1-11.9A9 9 0 0 0 26 18.6 7 7 0 0 0 22 33z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e6b45"/><stop offset="1" stop-color="#0b3822"/></linearGradient></defs></svg>
+        <h3>AWS Cloud Quest: Cloud Practitioner</h3>
+        <p class="cert-issuer-name">Amazon Web Services</p>
+        <p class="cert-meta">Issued Sep 25, 2023</p>
+      </div>
+      <div class="cert-card">
+        <svg class="cert-emblem" viewBox="0 0 64 64"><path d="M8 4h48v40l-24 18-24-18Z" fill="url(#g3)"/><rect x="19" y="18" width="26" height="20" rx="2" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M19 24h26M19 30h18" stroke="#fff" stroke-width="2.2"/><defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e0559b"/><stop offset="1" stop-color="#9c1f61"/></linearGradient></defs></svg>
+        <h3>AWS Knowledge: Cloud Essentials</h3>
+        <p class="cert-issuer-name">Amazon Web Services</p>
+        <p class="cert-meta">Issued Sep 22, 2023</p>
+      </div>
+      <div class="cert-card">
+        <svg class="cert-emblem" viewBox="0 0 64 64"><polygon points="32,3 61,32 32,61 3,32" fill="url(#g4)"/><path d="M32 19 45 32 32 45 19 32Z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><defs><linearGradient id="g4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8a93a3"/><stop offset="1" stop-color="#454c59"/></linearGradient></defs></svg>
+        <h3>AWS Partner: Cloud Economics Essentials</h3>
+        <p class="cert-issuer-name">Amazon Web Services</p>
+        <p class="cert-meta">Issued Aug 7, 2025</p>
+      </div>
+      <div class="cert-card">
+        <svg class="cert-emblem" viewBox="0 0 64 64"><polygon points="32,3 61,32 32,61 3,32" fill="url(#g5)"/><path d="M22 39 32 22l10 17Z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><defs><linearGradient id="g5" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8a93a3"/><stop offset="1" stop-color="#454c59"/></linearGradient></defs></svg>
+        <h3>AWS Partner: Sales Accredited</h3>
+        <p class="cert-issuer-name">Amazon Web Services</p>
+        <p class="cert-meta">Issued Aug 7, 2025</p>
+      </div>
+      <div class="cert-card">
+        <svg class="cert-emblem" viewBox="0 0 64 64"><polygon points="32,3 61,32 32,61 3,32" fill="url(#g6)"/><path d="M22 32h20M32 22v20" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle cx="32" cy="32" r="10" fill="none" stroke="#fff" stroke-width="2.2"/><defs><linearGradient id="g6" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8a93a3"/><stop offset="1" stop-color="#454c59"/></linearGradient></defs></svg>
+        <h3>AWS Partner: Technical Accredited</h3>
+        <p class="cert-issuer-name">Amazon Web Services</p>
+        <p class="cert-meta">Issued Aug 7, 2025</p>
+      </div>
+      <div class="cert-card">
+        <svg class="cert-emblem" viewBox="0 0 64 64"><rect x="6" y="6" width="52" height="52" rx="10" fill="url(#g7)"/><ellipse cx="32" cy="36" rx="10" ry="8" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="24" cy="24" r="3.4" fill="#fff"/><circle cx="32" cy="20" r="3.4" fill="#fff"/><circle cx="40" cy="24" r="3.4" fill="#fff"/><defs><linearGradient id="g7" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8b5cf6"/><stop offset="1" stop-color="#4c1d95"/></linearGradient></defs></svg>
+        <h3>Cloud Security Engineer Learning Path</h3>
+        <p class="cert-issuer-name">Datadog</p>
+        <p class="cert-meta">Issued Jun 27, 2025</p>
+      </div>
+      <div class="cert-card">
+        <svg class="cert-emblem" viewBox="0 0 64 64"><rect x="6" y="6" width="52" height="52" rx="10" fill="url(#g8)"/><path d="M32 15 47 21v11c0 10-6.5 16-15 20-8.5-4-15-10-15-20V21Z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><path d="M26 32l4 4 8-9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="g8" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c3aed"/><stop offset="1" stop-color="#3b1466"/></linearGradient></defs></svg>
+        <h3>Fortinet Certified Associate — Cybersecurity</h3>
+        <p class="cert-issuer-name">Fortinet</p>
+        <p class="cert-meta">Expires Jul 12, 2026</p>
+      </div>
+      <div class="cert-card">
+        <svg class="cert-emblem" viewBox="0 0 64 64"><rect x="6" y="6" width="52" height="52" rx="10" fill="url(#g9)"/><path d="M32 15 47 21v11c0 10-6.5 16-15 20-8.5-4-15-10-15-20V21Z" fill="none" stroke="#ee2c2d" stroke-width="2.2" stroke-linejoin="round"/><path d="M25 34l5 5 10-11" fill="none" stroke="#ee2c2d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="g9" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e9ecef"/><stop offset="1" stop-color="#c3c9d1"/></linearGradient></defs></svg>
+        <h3>FortiGate 7.4 Operator (NSE)</h3>
+        <p class="cert-issuer-name">Fortinet</p>
+        <p class="cert-meta">Issued Jul 12, 2024</p>
+      </div>
+      <div class="cert-card">
+        <svg class="cert-emblem" viewBox="0 0 64 64"><rect x="6" y="6" width="52" height="52" rx="10" fill="url(#g10)"/><path d="M32 14 46 21v10c0 9-6 15-14 19-8-4-14-10-14-19V21Z" fill="none" stroke="#ee2c2d" stroke-width="2.2" stroke-linejoin="round"/><circle cx="32" cy="30" r="3" fill="#ee2c2d"/><path d="M32 33v9" stroke="#ee2c2d" stroke-width="2.2" stroke-linecap="round"/><defs><linearGradient id="g10" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e9ecef"/><stop offset="1" stop-color="#c3c9d1"/></linearGradient></defs></svg>
+        <h3>Introduction to the Threat Landscape</h3>
+        <p class="cert-issuer-name">Fortinet</p>
+        <p class="cert-meta">Issued Sep 21, 2023</p>
+      </div>
+      <div class="cert-card">
+        <svg class="cert-emblem" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" fill="url(#g11)"/><path d="M14 36c8-10 28-10 36 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M20 28c6-6 18-6 24 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><circle cx="32" cy="42" r="3" fill="#fff"/><defs><linearGradient id="g11" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#0e7490"/></linearGradient></defs></svg>
+        <h3>Networking Basics</h3>
+        <p class="cert-issuer-name">Cisco Networking Academy</p>
+        <p class="cert-meta">Issued Jun 26, 2025</p>
+      </div>
+    </div>
+    <a class="btn btn-ghost" style="margin-top:24px;" href="https://www.credly.com/users/earl-jay-vincent-onipa" target="_blank" rel="noopener">View all badges on Credly →</a>
+  </section>
+
+  <!-- BUSINESS -->
+  <section id="business">
+    <div class="kicker">06 — Business</div>
+    <h2>Earsie Network and Data Solutions.</h2>
+    <div class="biz-panel">
+      <div>
+        <h3>Enterprise infrastructure, sized for local business.</h3>
+        <p>A DTI-registered IT and network solutions business based in Cagayan de Oro City, bringing the same infrastructure discipline used in enterprise environments — structured networks, secured firewalls, and monitored uptime — to businesses that need reliable IT without an in-house team.</p>
+        <a class="btn btn-ghost" href="#contact">Inquire about services →</a>
+      </div>
+      <ul class="biz-list">
+        <li>Network design & setup</li>
+        <li>Firewall & security configuration</li>
+        <li>Cloud infrastructure consulting</li>
+        <li>Ongoing monitoring & support</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact" class="wrap">
+  <div class="kicker">07 — Contact</div>
+  <div class="contact-grid">
+    <div>
+      <h2 style="margin-bottom:8px;">Let's connect.</h2>
+      <p style="color:var(--text-low); font-size:14px; max-width:420px;">Open to network/infrastructure roles, consulting work, and conversations about IT projects — reach out any time.</p>
+    </div>
+    <div class="contact-links">
+      <a class="btn btn-primary" href="mailto:your.email@example.com">Email me</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/earlonipa/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© <span id="year"></span> Earl Onipa · Cagayan de Oro City, Philippines</span>
+    <span class="visit-counter"><span class="dot" style="width:5px;height:5px;"></span> <span id="visitCount">—</span> unique visits</span>
+    <span>Built with a bias toward uptime.</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Unique visit counter (server-side, cookie-deduped)
+  fetch('/api/visits')
+    .then(res => res.json())
+    .then(data => {
+      const el = document.getElementById('visitCount');
+      if (el) el.textContent = data.count.toLocaleString();
+    })
+    .catch(() => {
+      const el = document.getElementById('visitCount');
+      if (el) el.textContent = '—';
+    });
+
+  // Port panel: 24 ports, staggered "link negotiation" animation, then idle random activity blips
+  const grid = document.getElementById('portGrid');
+  const total = 24;
+  const infraCount = 15; // green group
+  const ports = [];
+  for(let i=0;i<total;i++){
+    const p = document.createElement('div');
+    p.className = 'port';
+    const led = document.createElement('div');
+    led.className = 'led';
+    p.appendChild(led);
+    grid.appendChild(p);
+    ports.push(p);
+  }
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function bootSequence(){
+    ports.forEach((p, i) => {
+      setTimeout(() => {
+        p.classList.add(i < infraCount ? 'up' : 'act');
+      }, reduceMotion ? 0 : i * 70);
+    });
+  }
+  bootSequence();
+
+  if(!reduceMotion){
+    setInterval(() => {
+      const idx = Math.floor(Math.random() * total);
+      const p = ports[idx];
+      p.classList.toggle('act');
+      setTimeout(() => { if(idx >= infraCount) p.classList.add('act'); }, 400);
+    }, 900);
+  }
+</script>
+
+</body>
+</html>
